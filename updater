@@ -1,0 +1,138 @@
+#!/bin/bash
+
+#check whether we have internet connection
+#we use wget to get the status of out internet connection
+#
+#we have several option when updating our system: update,upgrade,dist-upgrade,clean,autoclean,remove autoremove....lets write this functions
+
+update(){
+	#this function will update the database of the packages and update packeges
+	echo "starting system update"
+	sudo apt-get update
+	sudo apt-get dist-upgrade -yy
+}
+
+clean(){
+	#lets clean our system
+	#cleans the local repo of retrieved packages
+	echo "Removing apt cache packages"
+	sudo apt-get clean -yy
+	#remove older packages that will not be used
+	sudo apt-get autoclean -yy
+}
+
+remove(){
+	#lets get rid of the libraries and packages that installed automatically but are nolonger needed
+	echo "Removing packages and libraries that are not needed"
+	sudo apt-get autoremove -yy
+}
+
+fix_broken(){
+	#take care of the broken packages
+	#tries to install any package not properly installed
+	sudo dpkg --configure -a
+	#will use brute force to install the package
+	sudo apt-get install -f
+}
+
+updateComplete(){
+	echo "------------------"
+	echo "system update done"
+	echo "------------------"
+	exit
+}
+assist_me(){
+
+	less <<  _EOF_
+	updater version 1.0
+
+	NAME
+		updater - a program to update your system
+
+	SYNOPSIS
+		update [option]
+	
+	DESCRIPTION
+	updater - is a linux script that helps automate the process of updating 
+	your system...it can be used to update packages,upgrade packages clean
+	our system and also remove some old unused packages
+
+	USAGE
+		extract this program and copy the updater.sh to your path such as /bin 
+		type update [option} on your terminal to run it
+		./name --update 
+		options include 
+			--update - this will update the system local repo and do a full sy                      ste							m upgrade
+			--clean  - will update your system and clean the local repo
+			--remove - will remove libraries and packages not required anymore
+			--fix - should only be use if you get a broken packege error. it will											try to fix the error and then update your system
+			--help  - this opton will display this help page
+	
+	AUTHOR
+			peter macharia ,i am a bash script fun, i love working with linux ..
+			been programming on Linux ,using the C language and bash has been by default shell...
+			contact me at (mainapeter081@gmail.com)
+		
+
+
+_EOF_
+}
+#lets first confirm whether we have internet connection
+wget -q --tries=10 --timeout=20 --spider https://google.com > /dev/null 2>&1
+if [[ $? -eq 0 ]]
+then
+	#we have a connection lets perform some task
+
+		#check for required packages and install them if not found
+		dpkg -l | grep -qw less || sudo apt-get install less -yyq
+
+		echo "welcome to updater.."
+		if [ "$1" == "--update" ]
+		then
+			update
+			updateComplete
+		fi
+	
+		if [ "$1" == "--clean" ]
+		then
+			update
+			clean
+			updateComplete
+		fi
+
+		if [ "$1" == "--remove" ]
+		then 
+			update
+			remove
+			updateComplete
+		fi
+
+		if [ "$1" == "--fix" ]
+		then
+			fix_broken
+			update
+			updateComplete
+
+		fi
+
+		if [ "$1" == "--help" ]
+		then
+			assist_me
+		fi
+
+		if [ -n "$1" ]
+		then
+			echo "not  recognized...try updater --help"
+			exit 1
+		fi
+
+#when no args are supplied run update
+	update
+	updateComplete
+
+
+else
+	echo "-------------------------"
+	echo "CHECK YOUR CONNECTION"
+	echo "-------------------------"
+fi	

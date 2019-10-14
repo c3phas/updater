@@ -1,13 +1,13 @@
-# updater
-a program used to update debian and ubuntu systems
+<h2>updater</h2>
+<h4>Description</h4><p>A program used to update debian and ubuntu systems</p>
 
-updater is a gnu shell script that runs on debian and ubuntu systems
+<pre><p>Updater is a gnu shell script that runs on debian and ubuntu systems
 To use the program just download the file from github and extract it using tar 
-or any archive manager of your choice 
+or any archive manager of your choice </p></pre>
+<h3>Installation</h3>
+<p>After extracting copy the updater to a path on your system say /bin inorder to run updater from any location in the system..</p>
+<b>Any contribution is highly appreciated ..you can also fork the program and tweak it to your liking and redistribute it as guided by the licenSing terms of GPLv2</b>
+<i>incase of any issues just open an issue,if you have proposed changes just do a pull request</i>
 
-after extracting copy the updater to a path on your system say /bin inorder to run updater from any location in the system..
-Any contribution is highly appreciated ..you can also fork the program and tweak it to your liking and redistribute it as guided by the licenSing terms of GPLv2
-incase of any issues just open an issue,if you have proposed changes just do a pull request
-
-ADIOS
+<h5>ADIOS</h5>
 

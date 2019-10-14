@@ -7,7 +7,8 @@ or any archive manager of your choice </p></pre>
 <h3>Installation</h3>
 <p>After extracting copy the updater to a path on your system say /bin inorder to run updater from any location in the system..</p>
 <b>Any contribution is highly appreciated ..you can also fork the program and tweak it to your liking and redistribute it as guided by the licenSing terms of GPLv2</b>
-<i>incase of any issues just open an issue,if you have proposed changes just do a pull request</i>
+<br>
+<p><i>incase of any issues just open an issue,if you have proposed changes just do a pull request</i></p>
 
 <h5>ADIOS</h5>
 
